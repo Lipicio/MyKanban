@@ -26,22 +26,10 @@ class ModulesServiceProvider extends \Illuminate\Support\ServiceProvider
 
         include __DIR__ . '/../../routes/helper.php';
 
-        if(empty($modules)){
-            return;
-        }
-
         foreach ($modules as $module){
-
-                // Load the routes for each of the modules
             if(file_exists(__DIR__ . '/' . $module . '/routes.php')) {
                 include __DIR__ . '/' . $module . '/routes.php';
             }
-
-                // Load the views
-            if(is_dir(__DIR__ . '/' . $module . '/Views')) {
-                $this->loadViewsFrom(__DIR__ . '/' . $module . '/Views', $module);
-            }
-
         }
     }
 
@@ -51,20 +39,13 @@ class ModulesServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function boot()
     {
-        // For each of the registered modules, include their routes and Views
         \Route::group([
-            'middleware' => 'web'
+            'middleware' => 'api'
         ], function ($router) {
             $modules = config("module.modules");
-            $this->includeModules($modules);
-
-            $modules_mobile = config("module.mobiles");
-            $this->includeModules($modules_mobile);
+            $this->includeModules($modules);            
         });
-
-
-
-}
+    }
 
     public function register() {}
 }
