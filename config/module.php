@@ -2,9 +2,7 @@
 
 return array(
     'modules' => array(
-        'User'        
-    ),
-    'mobiles' => array(
-        'Mobile'
-    ),
+        'User',
+        'Board'
+    )
 );

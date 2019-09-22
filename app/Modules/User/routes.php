@@ -6,11 +6,11 @@ Route::group(array(
     'namespace' => 'App\Modules\User\Controllers',
 ), function() {
 
-	Route::post('login', 'UserController@login');
-	Route::post('register', 'UserController@register');
+	Route::post('/login', 'UserController@login');
+	Route::post('/register', 'UserController@register');
 	Route::group(['middleware' => 'auth:api'], function()
 	{
-	   Route::post('details', 'UserController@details');
+	   Route::get('/details', 'UserController@details');
 	});
 
 });
