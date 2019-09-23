@@ -12,4 +12,13 @@ Route::group(array(
 	Route::put('/edit/{boardId}', 'BoardController@edit');
 	Route::delete('/delete/{boardId}', 'BoardController@delete');
 
+	Route::group(array(
+		'as' => 'list.',
+		'prefix' => 'list'
+	), function() {		
+		Route::post('/create', 'BoardListController@create');
+		Route::put('/edit/{listId}', 'BoardListController@edit');
+		Route::delete('/delete/{listId}', 'BoardListController@delete');
+	});
+
 });

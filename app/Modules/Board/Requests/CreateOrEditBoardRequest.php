@@ -2,7 +2,7 @@
 
 namespace App\Modules\Board\Requests;
 
-class CreateOrEditRequest extends BaseBoardRequest
+class CreateOrEditBoardRequest extends BaseBoardRequest
 {
     public function rules()
     {

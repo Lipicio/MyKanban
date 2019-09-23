@@ -3,43 +3,32 @@
 namespace App\Modules\Board\Controllers;
 
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Modules\Board\Services\BoardService;
-use App\Modules\Board\Requests\GetBoardRequest;
-use App\Modules\Board\Requests\CreateOrEditBoardRequest;
-use App\Modules\Board\Requests\DeleteBoardRequest;
+use App\Modules\Board\Services\BoardListService;
+use App\Modules\Board\Requests\GetBoardListRequest;
+use App\Modules\Board\Requests\DeleteBoardListRequest;
+use App\Modules\Board\Requests\CreateOrEditBoardListRequest;
 
-class BoardController extends Controller
+class BoardListController extends Controller
 {
 
     private $service;
 
-    function __construct(BoardService $service)
+    function __construct(BoardListService $service)
     {
         $this->service = $service;
     }
 
-    public function get($boardId, GetBoardRequest $request)
-    {
-        try
-        {
-            $response = $this->service->getBoard($boardId);
-            return response()->json($response, 200);
-        } catch (\Exception $ex) {
-          \Log::error([$ex->getMessage(), $ex->getFile(), $ex->getLine(), $ex->getTraceAsString()]);
-          return response()->json(['error'=>'Internal Servidor Error'], 500);
-        }
-    }
-
-    public function create(CreateOrEditBoardRequest $request)
+    public function create(CreateOrEditBoardListRequest $request)
     {
         \DB::beginTransaction();
         try 
         {
-            $user = Auth::user();
-            $boardName = $request->get('boardName', '');
-            $response = $this->service->createOrEdit($user, $boardName);
+            $listName = $request->get('listName', '');
+            $boardId = $request->get('boardId', '');
+            $response = $this->service->createOrEdit($listName, $boardId);
 
             \DB::commit();
             return response()->json($response, 200);
@@ -50,14 +39,14 @@ class BoardController extends Controller
         }
     }
 
-    public function edit($boardId, CreateOrEditBoardRequest $request)
+    public function edit($listId, CreateOrEditBoardListRequest $request)
     {
         \DB::beginTransaction();
         try 
         {
-            $user = Auth::user();
-            $boardName = $request->get('boardName', '');
-            $response = $this->service->createOrEdit($user, $boardName, $boardId);
+            $listName = $request->get('listName', '');
+            $boardId = $request->get('boardId', '');
+            $response = $this->service->createOrEdit($listName, $boardId, $listId);
 
             \DB::commit();
             return response()->json($response, 200);
@@ -68,12 +57,12 @@ class BoardController extends Controller
         }
     }
 
-    public function delete($boardId, DeleteBoardRequest $request)
+    public function delete($listId, DeleteBoardListRequest $request)
     {
         \DB::beginTransaction();
         try 
         {
-            $response = $this->service->delete($boardId);
+            $response = $this->service->delete($listId);
             \DB::commit();
             return response()->json($response, 200);
         } catch (\Exception $ex) {

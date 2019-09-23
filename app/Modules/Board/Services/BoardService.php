@@ -15,7 +15,7 @@ class BoardService
 					'lists.cards'
 				])->find($boardId);
 
-		return ['board' => $board];
+		return $board;
 	}
 
 	public function createOrEdit($user, $boardName, $boardId = null)
@@ -23,9 +23,8 @@ class BoardService
 		$board = empty($boardId) ? new Board() : Board::find($boardId);
         $board->fill(['name' => $boardName, 'users_id' => $user->id]);
         $board->save();
-        $board = collect($board);
 
-        return ['boardId' => $board['id'], 'boardName' => $board['name']];
+        return ['boardId' => $board->id, 'boardName' => $board->name];
 	}
 
 	public function delete($boardId)
