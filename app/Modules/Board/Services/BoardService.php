@@ -6,6 +6,18 @@ use App\Modules\Board\Models\Board;
 
 class BoardService
 {
+	public function getBoard($boardId)
+	{
+		$board = Board::with([
+					'user' => function($query){
+						$query->select('id', 'name', 'email');
+					},
+					'lists.cards'
+				])->find($boardId);
+
+		return ['board' => $board];
+	}
+
 	public function createOrEdit($user, $boardName, $boardId = null)
 	{
 		$board = empty($boardId) ? new Board() : Board::find($boardId);

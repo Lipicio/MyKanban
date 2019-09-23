@@ -2,13 +2,12 @@
 
 namespace App\Modules\Board\Requests;
 
-class CreateOrEditRequest extends BaseBoardRequest
+class GetBoardRequest extends BaseBoardRequest
 {
     public function rules()
     {
         return [
             'boardId' => 'nullable|validate_boardId',
-            'boardName' => 'required|max:80'
         ];
     }
 

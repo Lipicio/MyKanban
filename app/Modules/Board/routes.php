@@ -7,8 +7,9 @@ Route::group(array(
     'middleware' => 'auth:api'
 ), function() {
 
-	Route::post('/create', 'BoardController@createOrEdit');
-	Route::put('/edit', 'BoardController@createOrEdit');
+	Route::get('/{boardId}', 'BoardController@get');
+	Route::post('/create', 'BoardController@create');
+	Route::put('/edit/{boardId}', 'BoardController@edit');
 	Route::delete('/delete/{boardId}', 'BoardController@delete');
 
 });
