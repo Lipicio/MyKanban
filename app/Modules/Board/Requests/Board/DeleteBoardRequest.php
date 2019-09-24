@@ -1,14 +1,15 @@
 <?php 
 
-namespace App\Modules\Board\Requests;
+namespace App\Modules\Board\Requests\Board;
 
-class CreateOrEditBoardRequest extends BaseBoardRequest
+use App\Modules\Board\Requests\BaseBoardRequest;
+
+class DeleteBoardRequest extends BaseBoardRequest
 {
     public function rules()
     {
         return [
-            'boardId' => 'nullable|validate_boardId',
-            'boardName' => 'required|max:80'
+            'boardId' => 'required|validate_boardId'
         ];
     }
 

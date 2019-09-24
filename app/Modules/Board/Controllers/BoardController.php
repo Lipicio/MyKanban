@@ -6,9 +6,9 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Modules\Board\Services\BoardService;
-use App\Modules\Board\Requests\GetBoardRequest;
-use App\Modules\Board\Requests\CreateOrEditBoardRequest;
-use App\Modules\Board\Requests\DeleteBoardRequest;
+use App\Modules\Board\Requests\Board\GetBoardRequest;
+use App\Modules\Board\Requests\Board\CreateOrEditBoardRequest;
+use App\Modules\Board\Requests\Board\DeleteBoardRequest;
 
 class BoardController extends Controller
 {

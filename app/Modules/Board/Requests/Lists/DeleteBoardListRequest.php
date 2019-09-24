@@ -1,20 +1,22 @@
 <?php 
 
-namespace App\Modules\Board\Requests;
+namespace App\Modules\Board\Requests\Lists;
 
-class DeleteBoardRequest extends BaseBoardRequest
+use App\Modules\Board\Requests\BaseBoardRequest;
+
+class DeleteBoardListRequest extends BaseBoardRequest
 {
     public function rules()
     {
         return [
-            'boardId' => 'required|validate_boardId'
+            'listId' => 'required|validate_listId'
         ];
     }
 
     protected function validationData()
     {
         return array_merge($this->request->all(), [
-            'boardId' => \Route::input('boardId'),
+            'listId' => \Route::input('listId'),
         ]);
     }
 

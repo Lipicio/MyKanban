@@ -21,4 +21,13 @@ Route::group(array(
 		Route::delete('/delete/{listId}', 'BoardListController@delete');
 	});
 
+	Route::group(array(
+		'as' => 'card.',
+		'prefix' => 'card'
+	), function() {		
+		Route::post('/create', 'BoardCardController@create');
+		Route::put('/edit/{listId}', 'BoardCardController@edit');
+		Route::delete('/delete/{listId}', 'BoardCardController@delete');
+	});
+
 });

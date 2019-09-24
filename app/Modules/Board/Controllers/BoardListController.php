@@ -2,14 +2,10 @@
 
 namespace App\Modules\Board\Controllers;
 
-use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Modules\Board\Services\BoardListService;
-use App\Modules\Board\Requests\GetBoardListRequest;
-use App\Modules\Board\Requests\DeleteBoardListRequest;
-use App\Modules\Board\Requests\CreateOrEditBoardListRequest;
+use App\Modules\Board\Requests\Lists\DeleteBoardListRequest;
+use App\Modules\Board\Requests\Lists\CreateOrEditBoardListRequest;
 
 class BoardListController extends Controller
 {
