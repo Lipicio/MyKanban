@@ -3,29 +3,31 @@
 namespace App\Modules\Board\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Board\Services\BoardListService;
-use App\Modules\Board\Requests\Lists\DeleteListRequest;
-use App\Modules\Board\Requests\Lists\CreateOrEditListRequest;
+use App\Modules\Board\Services\BoardCardService;
+use App\Modules\Board\Requests\Card\DeleteCardRequest;
+use App\Modules\Board\Requests\Card\CreateOrEditCardRequest;
 
-class BoardListController extends Controller
+class BoardCardController extends Controller
 {
 
     private $service;
 
-    function __construct(BoardListService $service)
+    function __construct(BoardCardService $service)
     {
         $this->service = $service;
     }
 
-    public function create(CreateOrEditListRequest $request)
+    public function create(CreateOrEditCardRequest $request)
     {
         \DB::beginTransaction();
-        try 
+        try
         {
-            $listName = $request->get('listName', '');
-            $boardId = $request->get('boardId', '');
-            $response = $this->service->createOrEdit($listName, $boardId);
+            $listId = $request->get('listId', '');
+            $cardName = $request->get('cardName', '');
+            $cardDescription = $request->get('cardDescription', '');
+            $cardDateLimit = $request->get('cardDateLimit', '');
 
+            $response = $this->service->createOrEdit($listId, $cardName, $cardDescription, $cardDateLimit);
             \DB::commit();
             return response()->json($response, 200);
         } catch (\Exception $ex) {
@@ -35,15 +37,17 @@ class BoardListController extends Controller
         }
     }
 
-    public function edit($listId, CreateOrEditListRequest $request)
+    public function edit($cardId, CreateOrEditCardRequest $request)
     {
         \DB::beginTransaction();
-        try 
+        try
         {
-            $listName = $request->get('listName', '');
-            $boardId = $request->get('boardId', '');
-            $response = $this->service->createOrEdit($listName, $boardId, $listId);
+            $listId = $request->get('listId', '');
+            $cardName = $request->get('cardName', '');
+            $cardDescription = $request->get('cardDescription', '');
+            $cardDateLimit = $request->get('cardDateLimit', '');
 
+            $response = $this->service->createOrEdit($listId, $cardName, $cardDescription, $cardDateLimit, $cardId);
             \DB::commit();
             return response()->json($response, 200);
         } catch (\Exception $ex) {
@@ -53,12 +57,12 @@ class BoardListController extends Controller
         }
     }
 
-    public function delete($listId, DeleteListRequest $request)
+    public function delete($cardId, DeleteCardRequest $request)
     {
         \DB::beginTransaction();
         try 
         {
-            $response = $this->service->delete($listId);
+            $response = $this->service->delete($cardId);
             \DB::commit();
             return response()->json($response, 200);
         } catch (\Exception $ex) {

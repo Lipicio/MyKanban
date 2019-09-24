@@ -15,7 +15,6 @@ class BoardCard extends Model
         'name',
         'description',
         'due_date',
-        'board_id',
         'board_list_id'
     ];
 }

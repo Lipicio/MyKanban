@@ -1,17 +1,15 @@
 <?php 
 
-namespace App\Modules\Board\Requests\Lists;
+namespace App\Modules\Board\Requests\Card;
 
 use App\Modules\Board\Requests\BaseBoardRequest;
 
-class CreateOrEditBoardListRequest extends BaseBoardRequest
+class DeleteCardRequest extends BaseBoardRequest
 {
     public function rules()
     {
         return [
-            'listId' => 'nullable|validate_listId',
-            'boardId' => 'required_without:listId|validate_boardId',
-            'listName' => 'required|max:45'
+            'listId' => 'required|validate_listId'
         ];
     }
 

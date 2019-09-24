@@ -4,7 +4,7 @@ namespace App\Modules\Board\Requests\Lists;
 
 use App\Modules\Board\Requests\BaseBoardRequest;
 
-class DeleteBoardListRequest extends BaseBoardRequest
+class DeleteListRequest extends BaseBoardRequest
 {
     public function rules()
     {
